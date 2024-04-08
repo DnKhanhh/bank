@@ -6,8 +6,29 @@
     pull_request:
       branches: [ "master" ]
 
-  jobs:
+#  jobs:
+#
+#    test:
+#      runs-on: ubuntu-latest
+#      strategy:
+#        matrix:
+#          go-version: [ '1.22.x' ]
+#
+#      steps:
+#        - name: Setup Go ${{ matrix.go-version }}
+#          uses: actions/setup-go@v4
+#          with:
+#            go-version: ${{ matrix.go-version }}
+#          id: go
+#
+#        - name: Check out the code into the Go module directory
+#          uses: actions/checkout@
+#
+#        - name: test
+#          run: make test
 
+
+  jobs:
     test:
       runs-on: ubuntu-latest
       strategy:
@@ -15,14 +36,11 @@
           go-version: [ '1.22.x' ]
 
       steps:
+        - uses: actions/checkout@v4
         - name: Setup Go ${{ matrix.go-version }}
           uses: actions/setup-go@v4
           with:
             go-version: ${{ matrix.go-version }}
-          id: go
-
-        - name: Check out the code into the Go module directory
-          uses: actions/checkout@
 
         - name: test
           run: make test
