@@ -13,7 +13,7 @@
           go-version: [ '1.22.x' ]
       services:
         postgres:
-          image: postgres16
+          image: postgres:16.2
           env:
             POSTGRES_USER: root
             POSTGRES_PASSWORD: secret
