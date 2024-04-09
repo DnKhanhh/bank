@@ -49,7 +49,7 @@ func (server *Server) createAccount(ctx *gin.Context) {
 func (server *Server) getAccount(ctx *gin.Context) {
 	var req getAccountRequest
 
-	if err := ctx.ShouldBindQuery(&req); err != nil {
+	if err := ctx.ShouldBindUri(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
