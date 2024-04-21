@@ -16,8 +16,9 @@ COPY app.env .
 COPY start.sh .
 COPY db/migration ./migration
 
-EXPOSE 8081
+EXPOSE 8082
 
-CMD [ "/app/main" ]
-ENTRYPOINT [ "/app/start.sh" ]
+CMD set -e && echo "Running database migration..." && /app/migrate -path /app/migration -database "$DB_SOURCE" -verbose up && echo "Database migration complete." && /app/main
+# CMD [ "/app/main" ]
+# ENTRYPOINT [ "/app/start.sh" ]
 

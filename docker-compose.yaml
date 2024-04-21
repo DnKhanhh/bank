@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.9"
 services:
   postgres:
     image: postgres:16.2
@@ -7,9 +7,10 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=secret
       - POSTGRES_DB=bank
+      - DB_SOURCE=postgresql://root:secret@postgres:5432/bank?sslmode=disable
     healthcheck:
-      test: ["CMD-SHELL", "sh -c 'pg_isready -U root -d bank'"]
-      interval: 3s
+      test: ["CMD-SHELL", "pg_isready -d bank"]
+      interval: 5s
       timeout: 5s
       retries: 5
   api:
@@ -17,7 +18,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8081:8081"
+      - "8082:8082"
     environment:
       - DB_SOURCE=postgresql://root:secret@postgres:5432/bank?sslmode=disable
       - GIN_MODE=release
