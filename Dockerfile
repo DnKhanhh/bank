@@ -18,7 +18,7 @@ COPY db/migration ./migration
 
 EXPOSE 8082
 
-CMD set -e && echo "Running database migration..." && /app/migrate -path /app/migration -database "$DB_SOURCE" -verbose up && echo "Database migration complete." && /app/main
+CMD set -e && echo "Running database migration..." && source /app/app.env && /app/migrate -path /app/migration -database "$DB_SOURCE" -verbose up && echo "Database migration complete." && /app/main
 # CMD [ "/app/main" ]
 # ENTRYPOINT [ "/app/start.sh" ]
 
